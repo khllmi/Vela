@@ -19,7 +19,6 @@ import { BinanceProvider } from '../src/data/providers/binance';
 import { addSampleMarks } from './marks';
 import { DemoEngine, DEMO_SCRIPTS } from './demo-engine';
 import { playgroundStorage } from './persistence';
-import { installWatchlist, WATCHLIST_TOPBAR_RIGHT } from './watchlist'; // registers the Watchlist side panel
 
 // The playground's CUSTOM persistence (shared with the workspace page): with `persist`
 // on, the shell saves and restores EVERYTHING through this adapter — prefs, renderer
@@ -32,7 +31,6 @@ const ws = new VelaWorkspace('#chart', {
     symbol: 'BTCUSDT', // bare = first declared provider (binance); 'coinbase:BTC-USD' pins a venue
     timeframe: '60',
     live: true,
-    topbar: { right: WATCHLIST_TOPBAR_RIGHT }, // the watchlist toggle pinned at the far right
     theme: 'dark',
     autofocus: true, // the chart IS the page — shortcuts work from the first keystroke
     persist: 'vela-widget', // → 'vela-play:vela-widget' in devtools (the page's historical key)
@@ -100,8 +98,6 @@ void ws.chart.ready().then(() => addSampleMarks(ws.chart));
 ws.chart.on('theme:changed', (t) => {
     document.body.style.background = t.background;
 });
-
-installWatchlist(ws);
 
 // Handy for poking around from the browser console.
 (window as unknown as { ws: VelaWorkspace }).ws = ws;
