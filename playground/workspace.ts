@@ -12,6 +12,7 @@ import { BinanceProvider } from "../src/data/providers/binance";
 import { DemoEngine } from "./demo-engine";
 import { playgroundStorage } from "./persistence";
 import { addSampleMarks } from "./marks";
+import { installWatchlist, WATCHLIST_TOPBAR_RIGHT } from "./watchlist"; // registers the Watchlist side panel
 
 const ws = new VelaWorkspace("#workspace", {
   layout: "4",
@@ -32,6 +33,7 @@ const ws = new VelaWorkspace("#workspace", {
   defaultLanguage: "demo", // scripts added without a `language` run on the engine above
   // No script manifest: the indicators dialog lists the built-in catalog only.
   live: true,
+  topbar: { right: WATCHLIST_TOPBAR_RIGHT }, // the watchlist toggle pinned at the far right
   theme: "dark",
   autofocus: true, // the workspace IS the page — shortcuts work from the first keystroke
   // The playground's CUSTOM persistence (shared with the widget page): the whole
@@ -114,6 +116,8 @@ ws.on("cell:created", ({ id }) => {
   const cell = ws.cell(id);
   if (cell) seedMarks(cell.chart);
 });
+
+installWatchlist(ws);
 
 // Handy for poking around from the browser console (and for the automated probes).
 (window as unknown as { __ws: VelaWorkspace }).__ws = ws;
