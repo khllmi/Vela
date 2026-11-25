@@ -1,6 +1,4 @@
-line one
-    indented two
-}// A TradingView-style watchlist — framework-free DOM + live Binance 24h tickers.
+// A TradingView-style watchlist — framework-free DOM + live Binance 24h tickers.
 // Kept free of Vela imports so the panel (watchlist.ts) and any standalone preview
 // mount the exact same code. Styling uses the kit's `--vela-*` theme tokens, with
 // dark fallbacks for use outside a Vela shell.
