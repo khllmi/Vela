@@ -9,6 +9,8 @@ import { velaUiSource } from './scripts/vela-ui-source.mjs';
  */
 export default defineConfig({
     root: 'playground',
+    base: './',
+    build: { outDir: '../dist-pages', emptyOutDir: true },
     server: { port: 5190, strictPort: true },
     plugins: [velaUiSource()],
 });
