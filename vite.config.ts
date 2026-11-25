@@ -9,8 +9,6 @@ import { velaUiSource } from './scripts/vela-ui-source.mjs';
  */
 export default defineConfig({
     root: 'playground',
-    base: './',
-    build: { outDir: '../dist-pages', emptyOutDir: true, rollupOptions: { input: ['index', 'widget', 'workspace', 'primitives'].map((p) => new URL('./playground/' + p + '.html', import.meta.url).pathname) } },
     server: { port: 5190, strictPort: true },
     plugins: [velaUiSource()],
 });
