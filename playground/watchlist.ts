@@ -14,6 +14,16 @@ export const WATCHLIST_TOGGLE_ID = 'playground.watchlist.toggle';
  *  default right-hand items, in their default order, then ours. Pass as `topbar.right`. */
 export const WATCHLIST_TOPBAR_RIGHT = ['actions', 'alerts', 'panels', 'screenshot', 'fullscreen', WATCHLIST_TOGGLE_ID];
 
+// The panel's own button in the topbar's panel group duplicates the far-right toggle —
+// hide just that one (the shell names it `vela-widget-panel-<id>`; the id has a dot, so
+// match the class as a whole word rather than as a CSS class selector).
+if (typeof document !== 'undefined' && !document.getElementById('vwl-hide-panel-btn')) {
+    const style = document.createElement('style');
+    style.id = 'vwl-hide-panel-btn';
+    style.textContent = `.vela-widget-panels [class~="vela-widget-panel-${WATCHLIST_PANEL_ID}"] { display: none !important; }`;
+    document.head.appendChild(style);
+}
+
 registerIcon(
     'watchlist',
     '<svg viewBox="0 0 16 16" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 4h7M2.5 8h7M2.5 12h5"/><path d="m12.5 9.3.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2-1.45-1.4 2-.3z"/></svg>',
